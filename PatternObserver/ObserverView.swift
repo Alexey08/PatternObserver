@@ -60,14 +60,7 @@ class ObserverView: UIView {
         lable.clipsToBounds = true
         return lable
     }()
-    
-    // создаем UISwitch
-    var subscriptionSwitch: UISwitch = {
-        let mySwich = UISwitch()
-        mySwich.translatesAutoresizingMaskIntoConstraints = false
-        return mySwich
-    }()
-        
+            
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -76,7 +69,6 @@ class ObserverView: UIView {
         self.addSubview(weatherForecastLabel)
         self.addSubview(weatherImage)
         self.addSubview(subcruptionLabel)
-        self.addSubview(subscriptionSwitch)
         
         addConstraint()
     }
@@ -103,9 +95,6 @@ class ObserverView: UIView {
             subcruptionLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             subcruptionLabel.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -16),
             subcruptionLabel.heightAnchor.constraint(equalToConstant: 48),
-            
-            subscriptionSwitch.centerYAnchor.constraint(equalTo: subcruptionLabel.centerYAnchor),
-            subscriptionSwitch.trailingAnchor.constraint(equalTo: subcruptionLabel.trailingAnchor, constant: -16),
             
             weatherImage.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             weatherImage.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),

@@ -9,6 +9,9 @@ import Foundation
 
 class Publisher {
     
+    // Делаем Publisher - Singleton
+    static var shared = Publisher()
+    
     // Список публикации (погода)
     private lazy var publications = ["sun.max", "moon", "cloud", "cloud.rain",
                              "cloud.bolt.rain", "cloud.snow", "cloud.sun",
@@ -19,7 +22,9 @@ class Publisher {
     lazy var imageWeather = "questionmark.square"
     
     // Список подписчиков
-    private lazy var observers = [Observer]()
+    lazy var observers = [Observer]()
+    
+    private init () {}
     
     // Метод, для подписки на Publisher
     func appendObserver(_ observer: Observer) {
@@ -41,8 +46,11 @@ class Publisher {
     }
 }
 
-protocol Observer: AnyObject {
 
+// Протокол для слушателей
+protocol Observer: AnyObject {
+    
+    // Метод для получения обновлений
     func update(publisher: Publisher)
 }
 
