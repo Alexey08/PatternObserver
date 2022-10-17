@@ -62,7 +62,7 @@ class ObserverView: UIView {
     }()
     
     // создаем UISwitch
-    private lazy var subscriptionSwitch: UISwitch = {
+    var subscriptionSwitch: UISwitch = {
         let mySwich = UISwitch()
         mySwich.translatesAutoresizingMaskIntoConstraints = false
         return mySwich
@@ -114,7 +114,13 @@ class ObserverView: UIView {
         ])
     }
     
+    // Метод, добавляет имя observerLabel
     func addNameLable(name: String){
         observerLabel.text = name
+    }
+    
+    // Метол, для добавления картинки в weatherImage
+    func addWeatherImage(weather: String){
+        weatherImage.image = UIImage(systemName: weather)
     }
 }

@@ -24,12 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                               image: UIImage(systemName: "antenna.radiowaves.left.and.right.circle"),
                                               selectedImage: UIImage(systemName: "antenna.radiowaves.left.and.right.circle.fill"))
         
-        let firstObserverVC = FirstObserverViewController()
+        let firstObserverVC = publisherVC.observerFirst
         firstObserverVC.tabBarItem = UITabBarItem(title: "Observer #1",
                                                   image: UIImage(systemName: "radio"),
                                                   selectedImage: UIImage(systemName: "radio.fill"))
         
-        let secondObserverVC = SecondObserverViewController()
+        let secondObserverVC = publisherVC.observerSecond
         secondObserverVC.tabBarItem = UITabBarItem(title: "Observer #2",
                                                    image: UIImage(systemName: "radio"),
                                                    selectedImage: UIImage(systemName: "radio.fill"))

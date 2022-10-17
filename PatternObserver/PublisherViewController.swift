@@ -9,11 +9,13 @@ import UIKit
 
 class PublisherViewController: UIViewController {
     
-    let publicationsArray = ["sun.max", "moon", "cloud", "cloud.rain",
-                             "cloud.bolt.rain", "cloud.snow", "cloud.sun",
-                             "cloud.moon", "cloud.sun.bolt", "cloud.moon.bolt",
-                             "cloud.sun.rain", "cloud.moon.rain"]
-        
+    // Publisher
+    var publisherWeather = Publisher()
+    
+    // Наблюдатели
+    var observerFirst = FirstObserverViewController()
+    var observerSecond = SecondObserverViewController()
+            
     // создаем UILabel
     private lazy var publisherLabel: UILabel = {
         let lable = UILabel()
@@ -65,17 +67,68 @@ class PublisherViewController: UIViewController {
         button.addTarget(self, action: #selector(tapButton), for: .touchUpInside)
         return button
     }()
+    
+    // создаем UILabel
+    private lazy var subcruptionFirstLabel: UILabel = {
+        let lable = UILabel()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.text = "   Weather forecast subscription #1:"
+        lable.textColor = .black
+        lable.backgroundColor = .systemGray5
+        lable.font = UIFont.systemFont(ofSize: 14)
+        lable.textAlignment = .left
+        lable.layer.cornerRadius = 10
+        lable.clipsToBounds = true
+        return lable
+    }()
+    
+    // создаем UISwitch
+    lazy var subscriptionFirstSwitch: UISwitch = {
+        let mySwich = UISwitch()
+        mySwich.translatesAutoresizingMaskIntoConstraints = false
+        mySwich.addTarget(self, action: #selector(tapSwitch1), for: .valueChanged)
+        return mySwich
+    }()
+    
+    // создаем UILabel
+    private lazy var subcruptionSecondLabel: UILabel = {
+        let lable = UILabel()
+        lable.translatesAutoresizingMaskIntoConstraints = false
+        lable.text = "   Weather forecast subscription #2:"
+        lable.textColor = .black
+        lable.backgroundColor = .systemGray5
+        lable.font = UIFont.systemFont(ofSize: 14)
+        lable.textAlignment = .left
+        lable.layer.cornerRadius = 10
+        lable.clipsToBounds = true
+        return lable
+    }()
+    
+    // создаем UISwitch
+    lazy var subscriptionSecondSwitch: UISwitch = {
+        let mySwich = UISwitch()
+        mySwich.translatesAutoresizingMaskIntoConstraints = false
+        mySwich.addTarget(self, action: #selector(tapSwitch2), for: .valueChanged)
+        return mySwich
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = .white
         
+        // Добавляем элементы на экран
         self.view.addSubview(publisherLabel)
         self.view.addSubview(weatherForecastLabel)
         self.view.addSubview(weatherImage)
         self.view.addSubview(weatherForecastButton)
+        self.view.addSubview(subcruptionFirstLabel)
+        self.view.addSubview(subcruptionSecondLabel)
+        self.view.addSubview(subscriptionFirstSwitch)
+        self.view.addSubview(subscriptionSecondSwitch)
+
         
+        // Добавляем Constraint
         addConstraint()
     }
     
@@ -101,13 +154,56 @@ class PublisherViewController: UIViewController {
             weatherImage.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             weatherImage.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             weatherImage.topAnchor.constraint(equalTo: weatherForecastLabel.bottomAnchor, constant: 16),
-            weatherImage.bottomAnchor.constraint(equalTo: weatherForecastButton.topAnchor, constant: -16)
+            weatherImage.bottomAnchor.constraint(equalTo: subcruptionFirstLabel.topAnchor, constant: -16),
+            
+            subcruptionFirstLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            subcruptionFirstLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            subcruptionFirstLabel.bottomAnchor.constraint(equalTo: subcruptionSecondLabel.topAnchor, constant: -16),
+            subcruptionFirstLabel.heightAnchor.constraint(equalToConstant: 48),
+            
+            subscriptionFirstSwitch.centerYAnchor.constraint(equalTo: subcruptionFirstLabel.centerYAnchor),
+            subscriptionFirstSwitch.trailingAnchor.constraint(equalTo: subcruptionFirstLabel.trailingAnchor, constant: -16),
+            
+            subcruptionSecondLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            subcruptionSecondLabel.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            subcruptionSecondLabel.bottomAnchor.constraint(equalTo: weatherForecastButton.topAnchor, constant: -16),
+            subcruptionSecondLabel.heightAnchor.constraint(equalToConstant: 48),
+            
+            subscriptionSecondSwitch.centerYAnchor.constraint(equalTo: subcruptionSecondLabel.centerYAnchor),
+            subscriptionSecondSwitch.trailingAnchor.constraint(equalTo: subcruptionSecondLabel.trailingAnchor, constant: -16),
         ])
     }
     
+    // Метод, генерирует погоду по нажатию на кнопку
     @objc
-    private func tapButton() {
-        let imageWeather = publicationsArray.randomElement()
-        weatherImage.image = UIImage(systemName: imageWeather!)
+    func tapButton() {
+        publisherWeather.notify()
+        weatherImage.image = UIImage(systemName: publisherWeather.imageWeather)
+        print(observerFirst.weatherImage)
+        print(observerSecond.weatherImage)
+    }
+    
+    // Метод, реагирует на нажатие UISwitch1
+    @objc
+    func tapSwitch1(mySwitch: UISwitch) {
+        if mySwitch.isOn {
+            print("on obs1")
+            publisherWeather.appendObserver(observerFirst)
+        } else {
+            print("off obs1")
+            publisherWeather.removeObserver(observerFirst)
+        }
+    }
+    
+    // Метод, реагирует на нажатие UISwitch2
+    @objc
+    func tapSwitch2(mySwitch: UISwitch) {
+        if mySwitch.isOn {
+            print("on obs2")
+            publisherWeather.appendObserver(observerSecond)
+        } else {
+            print("off obs2")
+            publisherWeather.removeObserver(observerSecond)
+        }
     }
 }

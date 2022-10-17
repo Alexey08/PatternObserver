@@ -14,6 +14,7 @@
 		C442730128F98D28000CD0B7 /* PublisherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C442730028F98D28000CD0B7 /* PublisherViewController.swift */; };
 		C442730328F98D59000CD0B7 /* FirstObserverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C442730228F98D59000CD0B7 /* FirstObserverViewController.swift */; };
 		C442730528F9D573000CD0B7 /* ObserverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C442730428F9D573000CD0B7 /* ObserverView.swift */; };
+		C46DC94128FC2A6400B1DE3B /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46DC94028FC2A6400B1DE3B /* Publisher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		C442730028F98D28000CD0B7 /* PublisherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherViewController.swift; sourceTree = "<group>"; };
 		C442730228F98D59000CD0B7 /* FirstObserverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstObserverViewController.swift; sourceTree = "<group>"; };
 		C442730428F9D573000CD0B7 /* ObserverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverView.swift; sourceTree = "<group>"; };
+		C46DC94028FC2A6400B1DE3B /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				C44272E628F98AD5000CD0B7 /* AppDelegate.swift */,
+				C46DC94028FC2A6400B1DE3B /* Publisher.swift */,
 				C442730028F98D28000CD0B7 /* PublisherViewController.swift */,
 				C442730228F98D59000CD0B7 /* FirstObserverViewController.swift */,
 				C44272FE28F98D16000CD0B7 /* SecondObserverViewController.swift */,
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C44272FF28F98D16000CD0B7 /* SecondObserverViewController.swift in Sources */,
+				C46DC94128FC2A6400B1DE3B /* Publisher.swift in Sources */,
 				C442730328F98D59000CD0B7 /* FirstObserverViewController.swift in Sources */,
 				C442730528F9D573000CD0B7 /* ObserverView.swift in Sources */,
 				C44272E728F98AD5000CD0B7 /* AppDelegate.swift in Sources */,
